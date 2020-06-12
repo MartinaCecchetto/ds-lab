@@ -1,0 +1,28 @@
+---
+title: 'Progetto'
+author: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preprocessing
+
+```{r}
+clienti <- read.csv("DatasetClientClustering.csv", encoding="UTF-8", comment.char="#", na.strings="")
+head(clienti)
+```
+```{r}
+clienti <- clienti[,-(1:8)]
+head(clienti)
+anyNA(clienti)
+```
+
+```{r}
+clienti[clienti$PanicMood==-1,"PanicMood"]<-1
+clienti$controllo <- rowSums(clienti[,(ncol(clienti)-4):ncol(clienti)])
+```
+
+
